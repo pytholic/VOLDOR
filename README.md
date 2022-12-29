@@ -105,6 +105,19 @@ Our system is built with cuda, cython and python. We will support the compatibil
         ```
     2. If succeed, `libgpu-kernels.so` and `pyvoldor_full.xxx.so` will appear in the `install` folder. Copy them to the `demo` folder.  
 
+### Using docker
+```sh
+# Build image
+docker build -t pytholic/voldor .
+
+# Run container
+. ./run-docker-container.bash
+```
+
+Later you can start same container over and over again.
+```sh
+docker start -ai voldor
+```
 
 
 ## **Prepare Data**
