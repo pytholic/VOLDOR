@@ -1,8 +1,11 @@
-FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
 LABEL maintainer='rajahaseeb147@gmail.com'
 
 ARG DEBIAN_FRONTEND=noninteractive
+
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES graphics,compute,utility
 
 RUN apt-get update \
     && apt-get install -y \
@@ -59,7 +62,8 @@ RUN git clone https://github.com/pytholic/VOLDOR.git && \
 # Install pyDBoW3
 RUN git clone https://github.com/pytholic/pyDBoW3.git && \
     cd /root/pyDBoW3 && \
-    . ./build.sh && \
+    sudo chmod +x build.sh && \
+    sudo ./build.sh && \
     cp /root/pyDBoW3/build/pyDBoW3.so /root/VOLDOR/demo/
     
 # Define default command.
