@@ -14,4 +14,4 @@ docker run \
   -e DISPLAY=$DISPLAY \
   -e XAUTHORITY=$home_folder/.Xauthority \
   -e QT_X11_NO_MITSHM=1 \
-  -it pytholic/voldor
+  -it pytholic/voldor2

@@ -16,14 +16,15 @@ RUN apt-get update \
         libsuitesparse-dev \
         libboost-all-dev \
         mesa-utils \
-        python-dev \
+        python3-dev \
+        python3-numpy \
         python-numpy \
-        python-opencv \
-        python-pip \
-        python-pyproj \
-        python-scipy \
-        python-yaml \
-        python-opengl \
+        python3-opencv \
+        python3-pip \
+        python3-pyproj \
+        python3-scipy \
+        python3-yaml \
+        python3-opengl \
         curl \
         wget \
         vim \
@@ -31,7 +32,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-RUN python -m pip install --upgrade pip
+RUN python3 -m pip install --upgrade pip
 
 RUN mkdir -p /root/
 
@@ -56,7 +57,7 @@ RUN git clone https://github.com/pytholic/VOLDOR.git && \
     cd /root/VOLDOR/slam_py/install  && python3 setup_linux_full.py build_ext -i && cp pyvoldor_full.cpp pyvoldor_full.cpython-36m-x86_64-linux-gnu.so pyvoldor_full.pyx libgpu-kernels.so /root/VOLDOR/demo/
 
 # Install pyDBoW3
-RUN https://github.com/pytholic/pyDBoW3.git && \
+RUN git clone https://github.com/pytholic/pyDBoW3.git && \
     cp /root/pyDBoW3/build/pyDBoW3.so /root/VOLDOR/demo/
     
 # Define default command.
