@@ -58,6 +58,8 @@ RUN git clone https://github.com/pytholic/VOLDOR.git && \
 
 # Install pyDBoW3
 RUN git clone https://github.com/pytholic/pyDBoW3.git && \
+    cd /root/pyDBoW3 && \
+    . ./build.sh && \
     cp /root/pyDBoW3/build/pyDBoW3.so /root/VOLDOR/demo/
     
 # Define default command.
