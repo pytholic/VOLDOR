@@ -5,7 +5,7 @@ xhost +local:root
 
 # run docker
 docker run \
-  --name voldor \
+  --name voldor2 \
   --ipc=host \
   --gpus all \
   --privileged \

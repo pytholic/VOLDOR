@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y \
+        sudo  \
         build-essential \
         cmake \
         git \
@@ -14,14 +15,15 @@ RUN apt-get update \
         libopencv-dev \
         libsuitesparse-dev \
         libboost-all-dev \
-        python3-dev \
-        python3-numpy \
-        python3-opencv \
-        python3-pip \
-        python3-pyproj \
-        python3-scipy \
-        python3-yaml \
-        python3-opengl \
+        mesa-utils \
+        python-dev \
+        python-numpy \
+        python-opencv \
+        python-pip \
+        python-pyproj \
+        python-scipy \
+        python-yaml \
+        python-opengl \
         curl \
         wget \
         vim \
@@ -29,7 +31,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-RUN python3 -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip
 
 RUN mkdir -p /root/
 
@@ -47,11 +49,15 @@ RUN mkdir -p /source && cd /source && \
     cmake .. -DCMAKE_C_FLAGS=-fPIC -DCMAKE_CXX_FLAGS=-fPIC -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF && \
     make -j4 install && \
     cd / && rm -rf /source/ceres-solver-2.0.0
-    
+
 # Install VOLDOR
 RUN git clone https://github.com/pytholic/VOLDOR.git && \
     python3 -m pip install -r /root/VOLDOR/slam_py/install/requirements.txt && \
-    cd /root/VOLDOR/slam_py/install  && python3 setup_linux_full.py build_ext -i
+    cd /root/VOLDOR/slam_py/install  && python3 setup_linux_full.py build_ext -i && cp pyvoldor_full.cpp pyvoldor_full.cpython-36m-x86_64-linux-gnu.so pyvoldor_full.pyx libgpu-kernels.so /root/VOLDOR/demo/
 
+# Install pyDBoW3
+RUN https://github.com/pytholic/pyDBoW3.git && \
+    cp /root/pyDBoW3/build/pyDBoW3.so /root/VOLDOR/demo/
+    
 # Define default command.
 CMD ["bash"]
