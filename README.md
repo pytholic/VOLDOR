@@ -119,6 +119,11 @@ Later you can start same container over and over again.
 docker start -ai voldor
 ```
 
+You can also pull image from the hub.
+```sh
+docker pull pytholic/voldor:latest
+```
+
 
 ## **Prepare Data**
 Our method takes three inputs. You may download [demo data](https://stevens0-my.sharepoint.com/:f:/g/personal/zmin1_stevens_edu/ErEhdlXkUzJMtbzFZgsgZfwBw7KeZYI3lCJe4b5VTNvXRQ?e=TJe0eC) to run and play.  
